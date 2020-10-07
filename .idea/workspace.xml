@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6b16604-7110-4dce-915d-a5f0317491fe" name="Default Changelist" comment="" />
+    <list default="true" id="a6b16604-7110-4dce-915d-a5f0317491fe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/gu_che.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/secret_flags" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webcrawler" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Crawlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Crawler.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +35,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1iQY6dJ60IzG6tLr7b5aHtZ0Cj7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -36,10 +47,16 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gu.che\PycharmProjects\WebCrawler" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="Crawlers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Crawler" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="WebCrawler" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -52,7 +69,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Crawlers.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\gu.che\PycharmProjects\WebCrawler\Crawler.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -78,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1601841108590</updated>
       <workItem from="1601841128139" duration="1951000" />
-      <workItem from="1601910269515" duration="41447000" />
+      <workItem from="1601910269515" duration="47637000" />
     </task>
     <servers />
   </component>
@@ -86,26 +103,26 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3240" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601841150313">
+    <state x="3240" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602105265729">
       <screen x="2560" y="0" width="1920" height="1040" />
     </state>
-    <state x="3240" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1601841150313" />
-    <state width="696" height="912" key="GridCell.Tab.0.bottom" timestamp="1602044636354">
+    <state x="3240" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1602105265729" />
+    <state width="696" height="688" key="GridCell.Tab.0.bottom" timestamp="1602107232877">
       <screen x="2560" y="0" width="1920" height="1040" />
     </state>
-    <state width="696" height="912" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1602044636354" />
-    <state width="696" height="912" key="GridCell.Tab.0.center" timestamp="1602044636353">
+    <state width="696" height="688" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1602107232877" />
+    <state width="696" height="688" key="GridCell.Tab.0.center" timestamp="1602107232877">
       <screen x="2560" y="0" width="1920" height="1040" />
     </state>
-    <state width="696" height="912" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1602044636353" />
-    <state width="696" height="912" key="GridCell.Tab.0.left" timestamp="1602044636353">
+    <state width="696" height="688" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1602107232877" />
+    <state width="696" height="688" key="GridCell.Tab.0.left" timestamp="1602107232877">
       <screen x="2560" y="0" width="1920" height="1040" />
     </state>
-    <state width="696" height="912" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1602044636353" />
-    <state width="696" height="912" key="GridCell.Tab.0.right" timestamp="1602044636353">
+    <state width="696" height="688" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1602107232877" />
+    <state width="696" height="688" key="GridCell.Tab.0.right" timestamp="1602107232877">
       <screen x="2560" y="0" width="1920" height="1040" />
     </state>
-    <state width="696" height="912" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1602044636353" />
+    <state width="696" height="688" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1602107232877" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1602034501872">
       <screen x="2560" y="0" width="1920" height="1040" />
     </state>
@@ -128,6 +145,6 @@
     <state x="3200" y="344" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1601910466007" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WebCrawler$Crawlers.coverage" NAME="Crawlers Coverage Results" MODIFIED="1602043439812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WebCrawler$Crawlers.coverage" NAME="Crawler Coverage Results" MODIFIED="1602107232869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

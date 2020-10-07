@@ -13,11 +13,11 @@ SOCKET = ""
 # USER = sys.argv[1]
 # PASSWORD = sys.argv[2]
 # Chen Gu
-USER = '001969763'
-PASSWORD = 'I7NVEDDJ'
+# USER = '001969763'
+# PASSWORD = 'I7NVEDDJ'
 # Jiahao Song
-# USER = '001767233'
-# PASSWORD = 'T7529SAA'
+USER = '001767233'
+PASSWORD = 'T7529SAA'
 CONTENT_LENGTH = 560
 CONNECTION = "Keep-Alive"
 CONTNET_TYPE = "text/html; charset=utf-8"
@@ -26,12 +26,14 @@ COOKIE = "csrftoken=" + CSRFTOKEN + "; sessionid=" + SESSIONID
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
 
 
-
-
+"""
+process all the http request to the server
+request: a string that represents the http request
+"""
 def processRequest(request):
     try:
 
-        sc =socket.create_connection((HOST, 80))
+        sc = socket.create_connection((HOST, 80))
         sc.sendall(request.encode('utf-8'))
     except socket.error:
         # Send failed
@@ -42,6 +44,9 @@ def processRequest(request):
     return reply.decode('utf-8')
 
 
+"""
+Generate the csrftoken and sessionid token and set to global variable
+"""
 def getToken():
     request = processRequest(
         "GET /accounts/login/?next=/fakebook/ HTTP/1.1\r\nHost: " + HOST + "\r\n\r\n")
@@ -63,6 +68,9 @@ def getToken():
     print("##############################")
 
 
+"""
+get the new sessionid after login
+"""
 def login():
     requestbody = 'csrfmiddlewaretoken=' + CSRFTOKEN + '&username=' + USER \
                   + '&password=' + PASSWORD + '&next=/fakebook'
@@ -85,7 +93,10 @@ def login():
     print("session id updated to" + SESSIONID2)
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 
-
+"""
+generate the GET request
+return: the page that we are going to crawl
+"""
 def getContent(url):
     # print(CSRFTOKEN)
     # print(SESSIONID)
@@ -96,83 +107,58 @@ def getContent(url):
 
     return processRequest(data)
 
-
+"""
+find all the urls that exist in current page
+"""
 def findUrl(page):
     urls = re.compile(r'<a href=\"(/fakebook/[a-z0-9/]+)\">')
     links = urls.findall(page)
-    print("\nnew links are ++++++++++++++++++++++++")
-    print(links)
-    print("++++++++++++++++++++++++++++++++++")
+    # print("\nnew links are ++++++++++++++++++++++++")
+    # print(links)
+    # print("++++++++++++++++++++++++++++++++++")
     return links
 
-
+"""
+find secret flags on current page 
+parm: content: the current html page
+flags: a list that contains all the flags 
+return: the flags list will the new flag added
+"""
 def findSecretFlag(content, flags):
-    reg = re.compile(r'<h2 class=\'secret_flag\' style=\"color:red\">FLAG: (\w+)</h2>')
-    # reg = re.compile(r'secret_flag')
+    reg = re.compile(r'style=\"color:red\">FLAG: (\w+)</h2>')
     flag = reg.findall(content)
     if flag:
         flags.extend(flag)
-    print("\nflags are +++++++++++++++++++++++")
-    print(flags)
-    print("+++++++++++++++++++++++++++++++++")
-    # return flags
-    # pattern = re.compile(r'<h2 class=\'secret_flag\' style=\"color:red\">FLAG: (\w+)</h2>')
-    # flag = pattern.findall(content)
-    #flag =re.findall(r'FLAG:', content, re.I)
-    # flags.extend(flag)
-    # flag = re.findall(r'Zop',content, re.I)
-    # print('Page\n' + page)
-    # if flag != []:
-    #     flags.extend(flag)
-    # print("\nflags are +++++++++++++++++++++++")
-    # print(flags)
-    # print("+++++++++++++++++++++++++++++++++")
     return flags
 
 
-def processBadRequest(statusCode):
-    if statusCode == "200":
-        return 0
-    if statusCode == "500":
-        return 1
-    if statusCode == "301":
-        return 2
-    if statusCode == "404" or statusCode == "403" or statusCode =="-1":
-        return 3
-    else:
-        return -1
 
-
+"""
+get the status code from the http response
+"""
 def getStatuCode(content):
     statusCode = re.findall(r"\D(\d{3})\D", content)
-    if len(statusCode)!= 0:
+    if len(statusCode) != 0:
         # print("statue code is " + statusCode[0])
         return str(statusCode[0])
     return "-1"
 
-
-# getToken()
-# login()
-# content = getContent()
-# lst = []
-# getStatuCode(content)
-# findSecretFlag(content, lst)
-# # find more content
-# findUrl(content)
-
-
+"""
+main program that process the crawl.
+step: using BFS algorithm to process the crawl, 
+startUrl: represents the start point of BFS, which is the first page of fakebook
+urlList: the list that contains all the ulrs that needs to be crawled
+visited: the list that records all the ulrs that has already been crawled, this meant to prevent the cycle in BFS
+flagCont: count the number of flags we get
+flagList: records all the secret flags that have been found
+return: the flagList  
+"""
 def crawler(starturl):
     urlList = [starturl]
     visited = [starturl]
     flagCount = 0
     flagList = []
-
-    visit = 0
-    while flagCount != 5 and len(urlList) != 0 :
-        # count+=1
-        # if count> 1000:
-        #     break;
-        # count+=1
+    while flagCount != 5 and len(urlList) != 0:
         url = urlList.pop()
         pageContent = getContent(url)
         flagList = findSecretFlag(pageContent, flagList)
@@ -183,55 +169,22 @@ def crawler(starturl):
             if u not in visited:
                 urlList.append(u)
                 visited.append(u)
-        # if url not in visited:
-        #     visit+=1
         statusCode = getStatuCode(pageContent)
-        if(statusCode != "200"):
-            getContent(url)
+        # if encounter the 500 error or any other bad request, resend the request
+        while statusCode != "200":
+            pageContent =getContent(url)
+            statusCode = getStatuCode(pageContent)
             urlList.insert(0, url)
-            # print("inserted&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-            # while statusCode == "500":
-            #     pageContent = getContent(url)
-            # while processBadRequest(statusCode) != 0:
-            #     pageContent = getContent(url)
-            #     statusCode = getStatuCode(pageContent)
-            #     visit+=1
-            # print("content &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-            # print(pageContent)
-            # print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-            # if len(pageContent) == 0:
-            #     visited.append(url)
-            #     continue
-            # print(" &&&&&&&&&&&&&&&&&&\n")
-            # getStatuCode(pageContent)
-            # print(" &&&&&&&&&&&&&&&&&&\n")
-            # curFlags = []
-            # flagList = findSecretFlag(pageContent, flagList)
-            # if flagCount != len(flagList):
-            #     flagCount += 1
-            # newUrls = findUrl(pageContent)
-    #     print("cur urllist is &&&&&&&&&&&&&&&&&&\n")
-    #     print(urlList)
-    #     print('&&&&&&&&&&&&&&&&&&&&&&&&&&&')
-    #     # visited.append(url)
-    #     print("visited are ****************\n")
-    #     print(visited)
-    #     print('*****************************')
-    #     print("visit time = " )
-    #     print(visit)
-    # print("\nvisited size is "+ str(len(visited)))
-    #
-    # print(flagList)
-    # print("flag counts ****************\n")
-    # print(flagCount)
-    # print('*****************************')
+        print("%%%%%%%%%%%%%%%%%%%%%")
+        print(flagList)
     return flagList
 
-
+"""
+initialize the program
+"""
 def main():
     getToken()
     login()
-    # flags = []
 
     print(crawler("/fakebook/"))
 
@@ -239,13 +192,3 @@ def main():
 
 main()
 
-#
-# getToken()
-# login()
-# # print(CSRFTOKEN)
-# # print(SESSIONID)
-# # print(SESSIONID2)
-# result = getUrl()
-# print(findUrl(result))
-# #TODO BFS URL
-# FIND SECRET FLAG
