@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6b16604-7110-4dce-915d-a5f0317491fe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/gu_che.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/secret_flags" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webcrawler" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crawlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Crawler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/secret_flags" beforeDir="false" afterPath="$PROJECT_DIR$/secret_flags" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1601841108590</updated>
       <workItem from="1601841128139" duration="1951000" />
-      <workItem from="1601910269515" duration="47637000" />
+      <workItem from="1601910269515" duration="48515000" />
     </task>
     <servers />
   </component>
