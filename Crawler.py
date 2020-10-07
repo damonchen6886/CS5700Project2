@@ -50,12 +50,6 @@ def getToken():
     except IndexError:
         sys.exit("token generate failed")
 
-    print("##############################")
-    print("token generated: ")
-    print("CSRFTOKEN" + CSRFTOKEN)
-    print("SESSIONID" + SESSIONID)
-    print("##############################")
-
 
 """
 get the new sessionid after login
@@ -73,9 +67,6 @@ def login():
         SESSIONID2 = sessionid.findall(response)[0]
     except IndexError:
         sys.exit("location generate failed")
-    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    print("session id updated to" + SESSIONID2)
-    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 
 
 """
@@ -87,9 +78,6 @@ def getContent(url):
     # print(SESSIONID)
     data = "GET " + url + " HTTP/1.1\r\nHost: " + HOST + "\r\nConnection: keep-alive" + "\r\nCache-Control: max-age=0" + "\r\nCookie: csrftoken=" \
            + CSRFTOKEN + "; sessionid=" + SESSIONID2 + "\r\n\r\n"
-
-    # print('[DEBUG]Post getulr++++++++++++++++++++++++++++:\n' + data.__str__())
-
     return processRequest(data)
 
 
@@ -99,9 +87,6 @@ find all the urls that exist in current page
 def findUrl(page):
     urls = re.compile(r'<a href=\"(/fakebook/[a-z0-9/]+)\">')
     links = urls.findall(page)
-    # print("\nnew links are ++++++++++++++++++++++++")
-    # print(links)
-    # print("++++++++++++++++++++++++++++++++++")
     return links
 
 
@@ -145,10 +130,12 @@ def crawler(starturl):
     visited = [starturl]
     flagCount = 0
     flagList = []
+    count = 0
     while flagCount != 5 and len(urlList) != 0:
         url = urlList.pop()
         pageContent = getContent(url)
         flagList = findSecretFlag(pageContent, flagList)
+        count+=1
         if flagCount != len(flagList):
             flagCount += 1
         newUrls = findUrl(pageContent)
@@ -159,7 +146,7 @@ def crawler(starturl):
         statusCode = getStatuCode(pageContent)
         # if encounter the 500 error or any other bad request, resend the request
         if statusCode != "200":
-            pageContent = getContent(url)
+            getContent(url)
             urlList.insert(0, url)
         print("%%%%%%%%%%%%%%%%%%%%%")
         print(flagList)
