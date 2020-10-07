@@ -148,7 +148,7 @@ def crawler(starturl):
         if statusCode != "200":
             getContent(url)
             urlList.insert(0, url)
-        print("%%%%%%%%%%%%%%%%%%%%%")
+        print("%%%%%%%%%%%%%%%%%%%%%Current Flag are %%%%%%%%%%%%%%%%%%%%%%%")
         print(flagList)
     return flagList
 
@@ -159,6 +159,7 @@ initialize the program
 def main():
     getToken()
     login()
+    print("Final secret are: ")
     print(crawler("/fakebook/"))
 
 
