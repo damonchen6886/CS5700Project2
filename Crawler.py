@@ -2,7 +2,7 @@ import re
 import socket
 import sys
 
-#author Chen Gu, Jiahao Song
+# author Chen Gu, Jiahao Song
 #
 CSRFTOKEN = ""
 SESSIONID = ""
@@ -10,14 +10,8 @@ SESSIONID2 = ""
 SIZE = 4096
 HOST = "cs5700fa20.ccs.neu.edu"
 SOCKET = ""
-# USER = sys.argv[1]
-# PASSWORD = sys.argv[2]
-# Chen Gu
-# USER = '001969763'
-# PASSWORD = 'I7NVEDDJ'
-# Jiahao Song
-USER = '001767233'
-PASSWORD = 'T7529SAA'
+USER = sys.argv[1]
+PASSWORD = sys.argv[2]
 CONTENT_LENGTH = 560
 CONNECTION = "Keep-Alive"
 CONTNET_TYPE = "text/html; charset=utf-8"
@@ -25,22 +19,17 @@ ACCEPT_ENCODING = "gzip, deflate, br"
 COOKIE = "csrftoken=" + CSRFTOKEN + "; sessionid=" + SESSIONID
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
 
-
 """
 process all the http request to the server
 request: a string that represents the http request
 """
 def processRequest(request):
     try:
-
         sc = socket.create_connection((HOST, 80))
         sc.sendall(request.encode('utf-8'))
     except socket.error:
-        # Send failed
         exit('failed')
-
     reply = sc.recv(4096)
-    # print(reply.decode('utf-8'))
     return reply.decode('utf-8')
 
 
@@ -77,21 +66,17 @@ def login():
     request = "POST /accounts/login/ HTTP/1.1\r\nHost: " + HOST + "\r\nConnection: keep-alive\r\nContent-Length: " \
               + str(len(requestbody)) + "\r\nContent-Type: application/x-www-form-urlencoded\r\nCookie: csrftoken=" \
               + CSRFTOKEN + "; sessionid=" + SESSIONID + "\r\n\r\n" + requestbody
-    # print('[DEBUG]Post login:\n' + request)
-
     response = processRequest(request)
-
     sessionid = re.compile(r'sessionid=([a-z0-9]+)\;')
-
     try:
         global SESSIONID2
         SESSIONID2 = sessionid.findall(response)[0]
-
     except IndexError:
         sys.exit("location generate failed")
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     print("session id updated to" + SESSIONID2)
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+
 
 """
 generate the GET request
@@ -107,6 +92,7 @@ def getContent(url):
 
     return processRequest(data)
 
+
 """
 find all the urls that exist in current page
 """
@@ -117,6 +103,7 @@ def findUrl(page):
     # print(links)
     # print("++++++++++++++++++++++++++++++++++")
     return links
+
 
 """
 find secret flags on current page 
@@ -132,7 +119,6 @@ def findSecretFlag(content, flags):
     return flags
 
 
-
 """
 get the status code from the http response
 """
@@ -142,6 +128,7 @@ def getStatuCode(content):
         # print("statue code is " + statusCode[0])
         return str(statusCode[0])
     return "-1"
+
 
 """
 main program that process the crawl.
@@ -171,13 +158,13 @@ def crawler(starturl):
                 visited.append(u)
         statusCode = getStatuCode(pageContent)
         # if encounter the 500 error or any other bad request, resend the request
-        while statusCode != "200":
-            pageContent =getContent(url)
-            statusCode = getStatuCode(pageContent)
+        if statusCode != "200":
+            pageContent = getContent(url)
             urlList.insert(0, url)
         print("%%%%%%%%%%%%%%%%%%%%%")
         print(flagList)
     return flagList
+
 
 """
 initialize the program
@@ -185,10 +172,7 @@ initialize the program
 def main():
     getToken()
     login()
-
     print(crawler("/fakebook/"))
 
 
-
 main()
-
