@@ -162,7 +162,8 @@ def main():
     login()
     lst = crawler("/fakebook/")
     # print("\n*********Final secret flags are**************")
-    print(lst)
+    for item in lst:
+    	print(item.__str__())
     # print("***********************************************\n")
     #print(crawler("/fakebook/"))
 
