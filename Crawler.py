@@ -136,6 +136,7 @@ def crawler(starturl):
         pageContent = getContent(url)
         flagList = findSecretFlag(pageContent, flagList)
         count+=1
+	print("Searching webpage : " + str(count))
         if flagCount != len(flagList):
             flagCount += 1
         newUrls = findUrl(pageContent)
@@ -159,8 +160,10 @@ initialize the program
 def main():
     getToken()
     login()
-    print("Final secret are: ")
-    print(crawler("/fakebook/"))
-
+    lst = crawler("/fakebook/")
+    print("\n*********Final secret flags are**************")
+    print(lst)
+    print("***********************************************\n")
+    #print(crawler("/fakebook/"))
 
 main()
