@@ -94,7 +94,7 @@ def findUrl(page):
 find secret flags on current page 
 parm: content: the current html page
 flags: a list that contains all the flags 
-return: the flags list will the new flag added
+return: the flags list with the new flag added
 """
 def findSecretFlag(content, flags):
     reg = re.compile(r'style=\"color:red\">FLAG: (\w+)</h2>')
