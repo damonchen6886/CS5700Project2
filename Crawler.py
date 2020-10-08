@@ -107,7 +107,7 @@ def findSecretFlag(content, flags):
 """
 get the status code from the http response
 """
-def getStatuCode(content):
+def getStatusCode(content):
     statusCode = re.findall(r"\D(\d{3})\D", content)
     if len(statusCode) != 0:
         # print("statue code is " + statusCode[0])
@@ -119,8 +119,8 @@ def getStatuCode(content):
 main program that process the crawl.
 step: using BFS algorithm to process the crawl, 
 startUrl: represents the start point of BFS, which is the first page of fakebook
-urlList: the list that contains all the ulrs that needs to be crawled
-visited: the list that records all the ulrs that has already been crawled, this meant to prevent the cycle in BFS
+urlList: the list that contains all the urls that needs to be crawled
+visited: the list that records all the urls that has already been crawled, this meant to prevent the cycle in BFS
 flagCont: count the number of flags we get
 flagList: records all the secret flags that have been found
 return: the flagList  
@@ -136,7 +136,7 @@ def crawler(starturl):
         pageContent = getContent(url)
         flagList = findSecretFlag(pageContent, flagList)
         count+=1
-	print("Searching webpage : " + str(count))
+	# print("Searching webpage : " + str(count))
         if flagCount != len(flagList):
             flagCount += 1
         newUrls = findUrl(pageContent)
@@ -144,13 +144,13 @@ def crawler(starturl):
             if u not in visited:
                 urlList.append(u)
                 visited.append(u)
-        statusCode = getStatuCode(pageContent)
+        statusCode = getStatusCode(pageContent)
         # if encounter the 500 error or any other bad request, resend the request
         if statusCode != "200":
             getContent(url)
             urlList.insert(0, url)
-        print("%%%%%%%%%%%%%%%%%%%%%Current Flag are %%%%%%%%%%%%%%%%%%%%%%%")
-        print(flagList)
+        # print("%%%%%%%%%%%%%%%%%%%%%Current Flag are %%%%%%%%%%%%%%%%%%%%%%%")
+        # print(flagList)
     return flagList
 
 
@@ -161,9 +161,9 @@ def main():
     getToken()
     login()
     lst = crawler("/fakebook/")
-    print("\n*********Final secret flags are**************")
+    # print("\n*********Final secret flags are**************")
     print(lst)
-    print("***********************************************\n")
+    # print("***********************************************\n")
     #print(crawler("/fakebook/"))
 
 main()

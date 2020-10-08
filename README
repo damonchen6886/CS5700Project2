@@ -1,0 +1,37 @@
+This project is written by Chen Gu(gu.che@northeastern.edu) and Jiahao Song
+(song.jiaha@northeastern.edu)
+----------------------------------------------------------------------------
+Run
+$ make
+$ ./webcrawler [username] [password]
+
+----------------------------------------------------------------------------
+The flow of control
+1. Send HTTP GET request to fakebook and get csrftoken and sessionid since
+   they are a must for generating cookies.
+
+2. Send HTTP POST request with credentials to login to fakebook, then get a
+   new sessionid from the sever side.
+
+3. Use BFS algorithm to crawl the website from the initial fakebook page:
+   - Set local variables to store URLs that need to be visited, URLs that
+      are already visited, flags that need to be counted.
+   - Send HTTP GET requests to open the URL.
+      getContent(url) method
+   - Use regex to find urls link in every html page.
+      findUrl(page) method
+   - Use regex to find secret flag.
+      findSecretFlag(content, flags) method
+   - When 5 flags are found and there are no more URLs to visit, stop the
+      program.
+
+4. Exception Handler: After sending HTTP GET request, the client will parse
+   the response message and get HTTP status code, if the status code is not
+   200, recreate socket connection and continue to search.
+
+----------------------------------------------------------------------------
+
+Challenges and Tools
+1. We encountered some trouble while implementing BFS algorithm and handling
+   status code.
+2. We used Postman to make sure our APIs are correct.
