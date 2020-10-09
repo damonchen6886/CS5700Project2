@@ -30,6 +30,7 @@ def processRequest(request):
     except socket.error:
         exit('failed')
     reply = sc.recv(4096)
+    sc.close()
     return reply.decode('utf-8')
 
 
