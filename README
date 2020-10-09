@@ -5,6 +5,10 @@ Run
 $ make
 $ ./webcrawler [username] [password]
 
+In case of running into
+./webcrawler: /bin/bash^M: bad interpreter: No such file or directory
+$ dos2unix -k -o webcrawler
+
 ----------------------------------------------------------------------------
 The flow of control
 1. Send HTTP GET request to fakebook and get csrftoken and sessionid since
